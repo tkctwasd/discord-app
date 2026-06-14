@@ -21,14 +21,14 @@ async def export_orders(interaction):
         total_money += order["price"]
 
         lines.append(
-            f"   - {order['menu']}"
+            f"- {order['menu']}"
         )
 
     await interaction.response.send_message(
         "🍱 Đơn cơm hôm nay\n\n"
-        + "\n\n".join(lines)
-        + f"\n\nTổng suất: {len(orders)}"
-        + f"\nTổng tiền: {total_money:,}đ"
+        + "\n".join(lines)
+        + f"\n\nTổng suất: **{len(orders)}**"
+        + f"\nTổng tiền: **{total_money:,}đ**"
     )
 
 

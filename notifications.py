@@ -20,7 +20,7 @@ class NotificationsCog(commands.Cog):
         current_time = now_dt.time()
 
         # Check every minute; send at 10:00 AM
-        if current_time.hour == 16 and current_time.minute == 6:
+        if current_time.hour == 14 and current_time.minute == 56 and now_dt.weekday() < 7:  # Monday to Friday
             channel = self.bot.get_channel(ID_CHANNEL_NOTIFICATION)
             if channel is None:
                 try:
@@ -48,11 +48,10 @@ class NotificationsCog(commands.Cog):
     @tasks.loop(minutes=1)
     async def weekly_report_notification(self):
         now = datetime.now(self.timezone)
-        is_friday = now.weekday() == 5
         current_time = now.time()
 
         # Check every minute; send at 14:00 on Fridays
-        if is_friday and current_time.hour == 16 and current_time.minute == 23:
+        if now.weekday() == 6 and current_time.hour == 14 and current_time.minute == 58 :
             channel = self.bot.get_channel(ID_CHANNEL_REPORT)
             if channel is None:
                 try:
@@ -69,28 +68,31 @@ class NotificationsCog(commands.Cog):
                 )
                 
                 if debts:
-                    total = sum(debts.values())
-                    
+
+                    total = sum(
+                        info["money"]
+                        for info in debts.values()
+                    )
+
                     debt_lines = []
-                    for user_name, amount in sorted(debts.items(), key=lambda x: x[1], reverse=True):
-                        debt_lines.append(f"- **{user_name}**: {amount:,}đ")
-                    
-                    debt_text = "\n".join(debt_lines)
-                    if len(debt_text) > 1024:
-                        for i in range(0, len(debt_lines), 10):
-                            chunk = debt_lines[i:i+10]
-                            embed.add_field(
-                                name="Công nợ" if i == 0 else "‎",
-                                value="\n".join(chunk),
-                                inline=False
-                            )
-                    else:
-                        embed.add_field(
-                            name="",
-                            value=debt_text,
-                            inline=False
+
+                    for user_id, info in sorted(
+                        debts.items(),
+                        key=lambda x: x[1]["money"],
+                        reverse=True
+                    ):
+                        debt_lines.append(
+                            f"- **{info['user_name']}** (<@{user_id}>): {info['money']:,}đ"
                         )
-                    
+
+                    debt_text = "\n".join(debt_lines)
+
+                    embed.add_field(
+                        name="💰 Công nợ",
+                        value=debt_text,
+                        inline=False
+                    )
+
                     embed.add_field(
                         name="📌 Tổng cộng",
                         value=f"**{total:,}đ**",

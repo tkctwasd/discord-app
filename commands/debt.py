@@ -25,13 +25,13 @@ async def my_debt(interaction):
         total += debt["price"]
 
         lines.append(
-            f"{debt['date']} - {debt['price']:,}đ"
+            f"- {debt['date']} - {debt['price']:,}đ"
         )
 
     await interaction.response.send_message(
         "📋 Công nợ của bạn\n\n"
         + "\n".join(lines)
-        + f"\n\nTổng: {total:,}đ",
+        + f"\n\nTổng: **{total:,}đ**",
         ephemeral=True
     )
 
@@ -49,16 +49,16 @@ async def all_debt(interaction):
     total = 0
     lines = []
 
-    for user, money in debts.items():
+    for user_id, info in debts.items():
 
-        total += money
+        total += info["money"]
 
         lines.append(
-            f"{user}: {money:,}đ"
+            f"- **{info['user_name']}** (<@{user_id}>): {info['money']:,}đ"
         )
 
     await interaction.response.send_message(
         "📊 Công nợ hiện tại\n\n"
         + "\n".join(lines)
-        + f"\n\nTổng: {total:,}đ"
+        + f"\n\nTổng: **{total:,}đ**"
     )

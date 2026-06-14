@@ -73,12 +73,14 @@ def get_all_debts():
         if order["paid"]:
             continue
 
-        result.setdefault(
-            order["user_name"],
-            0
-        )
+        user_id = order["user_id"]
 
-        result[order["user_name"]] += order["price"]
+        result.setdefault(user_id, {
+            "user_name": order["user_name"],
+            "money": 0
+        })
+
+        result[user_id]["money"] += order["price"]
 
     return result
 

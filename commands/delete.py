@@ -8,11 +8,11 @@ async def delete_today(interaction, member):
     if removed == 0:
 
         await interaction.response.send_message(
-            f"⚠️ {member.display_name} không có đơn hôm nay."
+            f"⚠️ **{member.display_name}** (<@{member.id}>) không có đơn hôm nay."
         )
 
         return
 
     await interaction.response.send_message(
-        f"🗑️ Đã xoá {removed} đơn hôm nay của {member.display_name}"
+        f"🗑️ Đã xoá {removed} đơn hôm nay của **{member.display_name}** (<@{member.id}>)"
     )

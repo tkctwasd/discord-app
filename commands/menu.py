@@ -45,15 +45,15 @@ class FoodModal(discord.ui.Modal, title="Đặt cơm"):
         if updated:
             await interaction.response.send_message(
                 f"✏️ Đã cập nhật đơn hôm nay\n\n"
-                f"Tên: {order['user_name']}\n"
+                f"Tên: **{order['user_name']}** (<@{order['user_id']}>)\n"
                 f"Món: {order['menu']}\n"
-                f"Giá: {order['price']:,}đ"
+                f"Giá: **{order['price']:,}đ**"
             )
 
         else:
             await interaction.response.send_message(
                 f"✅ Đã ghi nhận đơn\n\n"
-                f"Tên: {order['user_name']}\n"
+                f"Tên: **{order['user_name']}** (<@{order['user_id']}>)\n"
                 f"Món: {order['menu']}\n"
-                f"Giá: {order['price']:,}đ"
+                f"Giá: **{order['price']:,}đ**"
             )

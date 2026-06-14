@@ -21,15 +21,15 @@ async def today_orders(interaction):
         total_money += order["price"]
 
         lines.append(
-            f"{index}. {order['user_name']}\n"
+            f"{index}. **{order['user_name']}** (<@{order['user_id']}>)\n"
             f"   - {order['menu']}"
         )
 
     await interaction.response.send_message(
         "🍱 Đơn cơm hôm nay\n\n"
         + "\n\n".join(lines)
-        + f"\n\nTổng suất: {len(orders)}"
-        + f"\nTổng tiền: {total_money:,}đ"
+        + f"\n\nTổng suất: **{len(orders)}**"
+        + f"\nTổng tiền: **{total_money:,}đ**"
     )
 
 
