@@ -158,20 +158,24 @@ async def on_ready():
     bot.tree.copy_global_to(guild=guild)
 
     synced = await bot.tree.sync(guild=guild)
-
+    
+    print(f"✅ Bot online: {bot.user}")
+    print(f"✅ Bot ID: {bot.user.id}")
+    print(f"✅ Connected to {len(bot.guilds)} servers")
     print(f"Synced {len(synced)} commands")
 
-    print(f"Bot online: {bot.user}")
-
-
 async def load_cogs():
-    """Load all cogs"""
+    print("[2/4] Đang load notifications...")
     await bot.load_extension('notifications')
+    print("[3/4] Load notifications thành công!")
 
 
 async def main():
+    print("[START] Khởi động bot...")
     async with bot:
+        print("[1/4] Đã vào async with bot")
         await load_cogs()
+        print("[4/4] Đang đăng nhập Discord...")
         await bot.start(TOKEN)
 
 

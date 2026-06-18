@@ -25,7 +25,7 @@ async def my_debt(interaction):
         total += debt["price"]
 
         lines.append(
-            f"- {debt['date']} - {debt['price']:,}đ"
+            f"- {debt['date']} - **{debt['price']:,}**đ"
         )
 
     await interaction.response.send_message(
@@ -54,7 +54,7 @@ async def all_debt(interaction):
         total += info["money"]
 
         lines.append(
-            f"- **{info['user_name']}** (<@{user_id}>): {info['money']:,}đ"
+            f"- **{info['user_name']}** (<@{user_id}>): **{info['money']:,}**đ"
         )
 
     await interaction.response.send_message(

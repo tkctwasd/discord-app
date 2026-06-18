@@ -1,5 +1,5 @@
 {
-  "next_id": 11,
+  "next_id": 13,
   "orders": [
     {
       "id": 1,
@@ -57,6 +57,16 @@
       "price": 30000,
       "paid": false,
       "message": "Món: ot\nGiá: 30,000đ"
+    },
+    {
+      "id": 12,
+      "date": "18/06/2026",
+      "user_id": 1087053059147972648,
+      "user_name": "mindongun123",
+      "menu": "Cơm gà",
+      "price": 30000,
+      "paid": false,
+      "message": "Món: Cơm gà\nGiá: 30,000đ"
     }
   ]
 }
