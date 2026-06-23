@@ -1,4 +1,5 @@
-﻿import discord
+﻿import asyncio
+import discord
 from discord.ui import Modal, TextInput, View, Button, Select
 from datetime import datetime
 import pytz
@@ -89,12 +90,6 @@ class PayConfirmModal(Modal, title="Xác nhận thanh toán"):
         required=False
     )
 
-    image_url = TextInput(
-        label="Link ảnh chuyển khoản",
-        placeholder="https://...",
-        required=False
-    )
-
     def __init__(self, order_ids, selected_orders, total):
         super().__init__()
         self.order_ids = order_ids
@@ -130,8 +125,6 @@ class PayConfirmModal(Modal, title="Xác nhận thanh toán"):
         admin_embed.add_field(name="💵 Tổng tiền", value=f"**{self.total:,}đ**", inline=True)
         admin_embed.add_field(name="📝 Nội dung", value=self.content.value or "(không có)", inline=False)
         admin_embed.set_footer(text=f"Gửi lúc {now.strftime('%H:%M %d/%m/%Y')}")
-        if self.image_url.value.strip():
-            admin_embed.set_image(url=self.image_url.value.strip())
 
         admin_view = AdminPayView(
             user=interaction.user,
@@ -167,6 +160,7 @@ class PayCancelView(View):
         self.admin_message = admin_message
         self.order_ids = order_ids
         self.done = False
+        self.image_added = False
 
     async def on_timeout(self):
         if not self.done:
@@ -176,6 +170,41 @@ class PayCancelView(View):
                 await self._submit_interaction.delete_original_response()
             except Exception:
                 pass
+
+    @discord.ui.button(label="📎 Thêm ảnh", style=discord.ButtonStyle.secondary, row=0)
+    async def add_image(self, interaction: discord.Interaction, button: Button):
+        if self.image_added:
+            await interaction.response.send_message("Đã thêm ảnh rồi.", ephemeral=True)
+            return
+
+        await interaction.response.send_message(
+            "📩 Vui lòng gửi ảnh vào **tin nhắn riêng (DM)** với bot trong 60 giây.",
+            ephemeral=True
+        )
+
+        dm = await interaction.user.create_dm()
+        await dm.send("📸 Gửi ảnh chuyển khoản tại đây (trong 60 giây):")
+
+        def check(m):
+            return m.author.id == interaction.user.id and m.channel.id == dm.id and m.attachments
+
+        try:
+            msg = await interaction.client.wait_for('message', check=check, timeout=60)
+            image_url = msg.attachments[0].url
+
+            embed = self.admin_message.embeds[0]
+            embed.set_image(url=image_url)
+            await self.admin_message.edit(embed=embed)
+
+            self.image_added = True
+            button.disabled = True
+            try:
+                await self._submit_interaction.edit_original_response(view=self)
+            except Exception:
+                pass
+            await dm.send("✅ Ảnh đã gửi thành công đến admin!")
+        except asyncio.TimeoutError:
+            await dm.send("⏰ Hết thời gian. Yêu cầu đã được gửi không có ảnh.")
 
     # @discord.ui.button(label="↩️ Hủy yêu cầu", style=discord.ButtonStyle.secondary)
     async def cancel(self, interaction: discord.Interaction, _: Button):
@@ -237,10 +266,32 @@ class RejectModal(Modal, title="Lý do từ chối"):
 
         channel = interaction.client.get_channel(self.channel_id)
         if channel:
-            await channel.send(
-                f"❌ <@{self.target_user.id}> - Yêu cầu thanh toán **{self.amount:,}đ** đã bị **từ chối**.\n"
-                f"📌 Lý do: {self.reason.value}"
+            now = datetime.now(TIMEZONE)
+            dates_lines = "\n".join(
+                f"• {o['date']} — {o['price']:,}đ"
+                for o in self.selected_orders
             )
+            embed = discord.Embed(
+                title="❌ Yêu cầu thanh toán bị từ chối",
+                color=discord.Color.red(),
+                timestamp=now
+            )
+            embed.add_field(
+                name="👤 Người thanh toán",
+                value=f"**{self.target_user.display_name}** (<@{self.target_user.id}>)",
+                inline=False
+            )
+            embed.add_field(name="📅 Các ngày thanh toán", value=dates_lines, inline=False)
+            embed.add_field(name="💵 Số tiền", value=f"**{self.amount:,}đ**", inline=True)
+            if self.content:
+                embed.add_field(name="📝 Nội dung", value=self.content, inline=False)
+            embed.add_field(name="📌 Lý do từ chối", value=self.reason.value, inline=False)
+            embed.add_field(
+                name="Từ chối bởi",
+                value=f"**{interaction.user.display_name}** (<@{interaction.user.id}>)",
+                inline=True
+            )
+            await channel.send(f"❌**{self.target_user.display_name}** (<@{self.target_user.id}>) đã bị từ chối yêu cầu thanh toán", embed=embed)
 
 
 class AdminPayView(View):
