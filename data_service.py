@@ -1,8 +1,11 @@
 import json
 from pathlib import Path
 from datetime import datetime
+import pytz
 
 DATA_FILE = Path("data/food_data.json")
+BILL_FILE = Path("data/bill_data.json")
+TIMEZONE = pytz.timezone('Asia/Ho_Chi_Minh')
 
 
 def load_data():
@@ -60,6 +63,7 @@ def get_user_debts(user_id):
         x for x in data["orders"]
         if x["user_id"] == user_id
         and not x["paid"]
+        and not x.get("pending", False)
     ]
 
 
@@ -130,25 +134,73 @@ def delete_order(user_id):
 
     return removed
 
-def mark_paid_by_amount(user_id, amount):
+def mark_pending_by_ids(order_ids):
+    data = load_data()
+    id_set = set(order_ids)
+    for order in data["orders"]:
+        if order["id"] in id_set:
+            order["pending"] = True
+    save_data(data)
+
+
+def unmark_pending_by_ids(order_ids):
+    data = load_data()
+    id_set = set(order_ids)
+    for order in data["orders"]:
+        if order["id"] in id_set:
+            order["pending"] = False
+    save_data(data)
+
+
+def mark_paid_by_ids(order_ids):
     data = load_data()
 
-    remaining = amount
+    id_set = set(order_ids)
     count = 0
     total = 0
 
     for order in data["orders"]:
-        if remaining <= 0:
-            break
-        if order["user_id"] == user_id and not order["paid"]:
+        if order["id"] in id_set and not order["paid"]:
             order["paid"] = True
             total += order["price"]
-            remaining -= order["price"]
             count += 1
 
     save_data(data)
 
     return count, total
+
+
+def record_bill(user_id, user_name, amount, content, order_ids, order_dates, confirmed_by_id, confirmed_by_name, status, reason=None):
+    if BILL_FILE.exists():
+        with open(BILL_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    else:
+        data = {"next_id": 1, "transactions": []}
+
+    now = datetime.now(TIMEZONE).strftime("%d/%m/%Y %H:%M:%S")
+
+    transaction = {
+        "id": data["next_id"],
+        "timestamp": now,
+        "user_id": user_id,
+        "user_name": user_name,
+        "amount": amount,
+        "content": content or "",
+        "order_ids": order_ids,
+        "order_dates": order_dates,
+        "confirmed_by_id": confirmed_by_id,
+        "confirmed_by_name": confirmed_by_name,
+        "status": status,
+        "reason": reason
+    }
+
+    data["transactions"].append(transaction)
+    data["next_id"] += 1
+
+    with open(BILL_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+    return transaction
 
 
 def get_today_orders():
