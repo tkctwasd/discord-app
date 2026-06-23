@@ -146,7 +146,8 @@ async def export(
     description="Gửi yêu cầu thanh toán công nợ"
 )
 async def pay(
-    interaction: discord.Interaction
+    interaction: discord.Interaction,
+    image: discord.Attachment = None
 ):
     debts = get_user_debts(interaction.user.id)
 
@@ -158,7 +159,7 @@ async def pay(
         return
 
     total_all = sum(o['price'] for o in debts)
-    view = PaySelectView(orders=debts)
+    view = PaySelectView(orders=debts, image_url=image.url if image else None)
 
    
     embed = discord.Embed(

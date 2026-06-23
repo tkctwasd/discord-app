@@ -8,7 +8,7 @@
       "user_name": "mindongun123",
       "menu": "com rang dua bo, com rang dua bo, com rang dua bo, com rang dua bo, com rang dua bo",
       "price": 30000,
-      "paid": false,
+      "paid": true,
       "message": "Món: com rang dua bo\nGiá: 30,000đ",
       "pending": false
     },
@@ -30,7 +30,7 @@
       "user_name": "mindongun123",
       "menu": "pho ha noi",
       "price": 30000,
-      "paid": false,
+      "paid": true,
       "message": "Món: pho ha noi\nGiá: 30,000đ",
       "pending": false
     },
@@ -43,7 +43,7 @@
       "price": 30000,
       "paid": false,
       "message": "Món: pho ha noi\nGiá: 30,000đ",
-      "pending": false
+      "pending": true
     },
     {
       "id": 18,
