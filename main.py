@@ -19,7 +19,8 @@ from commands.debt import (
 from commands.paid import (
     paid_user
 )
-from commands.pay import PayModal
+from commands.pay import PaySelectView
+from data_service import get_user_debts
 import asyncio
 
 intents = discord.Intents.default()
@@ -147,7 +148,37 @@ async def export(
 async def pay(
     interaction: discord.Interaction
 ):
-    await interaction.response.send_modal(PayModal())
+    debts = get_user_debts(interaction.user.id)
+
+    if not debts:
+        await interaction.response.send_message(
+            "✅ Bạn không có công nợ nào.",
+            ephemeral=True
+        )
+        return
+
+    total_all = sum(o['price'] for o in debts)
+    view = PaySelectView(orders=debts)
+
+   
+    embed = discord.Embed(
+        title="💰 Thanh Toán Công Nợ",
+        description="Chọn những ngày bạn muốn thanh toán từ danh sách bên dưới.",
+        color=discord.Color.blue()
+    )
+    
+    embed.add_field(
+        name="💵 Tổng nợ hiện tại",
+        value=f"**{total_all:,}đ** ({len(debts)} ngày)",
+        inline=False
+    )
+
+    await interaction.response.send_message(
+        embed=embed,
+        view=view,
+        ephemeral=True
+    )
+    view.original_interaction = interaction
 
 
 # @bot.event
