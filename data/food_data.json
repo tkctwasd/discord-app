@@ -1,5 +1,5 @@
 {
-  "next_id": 13,
+  "next_id": 14,
   "orders": [
     {
       "id": 1,
@@ -55,7 +55,7 @@
       "user_name": "mindongun123",
       "menu": "ot",
       "price": 30000,
-      "paid": false,
+      "paid": true,
       "message": "Món: ot\nGiá: 30,000đ"
     },
     {
@@ -65,8 +65,18 @@
       "user_name": "mindongun123",
       "menu": "Cơm gà",
       "price": 30000,
-      "paid": false,
+      "paid": true,
       "message": "Món: Cơm gà\nGiá: 30,000đ"
+    },
+    {
+      "id": 13,
+      "date": "23/06/2026",
+      "user_id": 1087053059147972648,
+      "user_name": "mindongun123",
+      "menu": "Com rang",
+      "price": 30000,
+      "paid": true,
+      "message": "Món: Com rang\nGiá: 30,000đ"
     }
   ]
 }

@@ -19,6 +19,7 @@ from commands.debt import (
 from commands.paid import (
     paid_user
 )
+from commands.pay import PayModal
 import asyncio
 
 intents = discord.Intents.default()
@@ -137,6 +138,16 @@ async def export(
     interaction: discord.Interaction
 ):
     await export_orders(interaction)
+
+
+@bot.tree.command(
+    name="pay",
+    description="Gửi yêu cầu thanh toán công nợ"
+)
+async def pay(
+    interaction: discord.Interaction
+):
+    await interaction.response.send_modal(PayModal())
 
 
 # @bot.event

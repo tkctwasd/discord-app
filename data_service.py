@@ -130,6 +130,27 @@ def delete_order(user_id):
 
     return removed
 
+def mark_paid_by_amount(user_id, amount):
+    data = load_data()
+
+    remaining = amount
+    count = 0
+    total = 0
+
+    for order in data["orders"]:
+        if remaining <= 0:
+            break
+        if order["user_id"] == user_id and not order["paid"]:
+            order["paid"] = True
+            total += order["price"]
+            remaining -= order["price"]
+            count += 1
+
+    save_data(data)
+
+    return count, total
+
+
 def get_today_orders():
 
     data = load_data()
