@@ -1,6 +1,10 @@
 import discord
+from datetime import datetime
+import pytz
 
 from data_service import create_order
+
+TIMEZONE = pytz.timezone('Asia/Ho_Chi_Minh')
 
 
 class FoodModal(discord.ui.Modal, title="Đặt cơm"):
@@ -10,30 +14,9 @@ class FoodModal(discord.ui.Modal, title="Đặt cơm"):
         placeholder="Cơm rang, gà, cần tỏi"
     )
 
-#     price = discord.ui.TextInput(
-#         label="Giá tiền",
-#         default="30000"
-#     )
-
-    async def on_submit(
-        self,
-        interaction: discord.Interaction
-    ):
-        try:
-            price = int(str(30000))
-        except:
-            await interaction.response.send_message(
-                "Giá tiền không hợp lệ",
-                ephemeral=True
-            )
-            return
-
-        confirm_message = None
-        if self.menu:
-            confirm_message = (
-                f"Món: {self.menu}\n"
-                f"Giá: {price:,}đ"
-            )
+    async def on_submit(self, interaction: discord.Interaction):
+        price = 30000
+        confirm_message = f"Món: {self.menu}\nGiá: {price:,}đ"
 
         order, updated = create_order(
             interaction.user,
@@ -42,18 +25,28 @@ class FoodModal(discord.ui.Modal, title="Đặt cơm"):
             message=confirm_message
         )
 
+        now = datetime.now(TIMEZONE)
+
         if updated:
-            await interaction.response.send_message(
-                f"✏️ Đã cập nhật đơn hôm nay\n\n"
-                f"Tên: **{order['user_name']}** (<@{order['user_id']}>)\n"
-                f"Món: {order['menu']}\n"
-                f"Giá: **{order['price']:,}đ**"
+            embed = discord.Embed(
+                title="✏️ Đã cập nhật đơn hôm nay",
+                color=discord.Color.orange(),
+                timestamp=now
+            )
+        else:
+            embed = discord.Embed(
+                title="🍚 Đã ghi nhận đơn",
+                color=discord.Color.green(),
+                timestamp=now
             )
 
-        else:
-            await interaction.response.send_message(
-                f"✅ Đã ghi nhận đơn\n\n"
-                f"Tên: **{order['user_name']}** (<@{order['user_id']}>)\n"
-                f"Món: {order['menu']}\n"
-                f"Giá: **{order['price']:,}đ**"
-            )
+        embed.add_field(
+            name="Người đặt",
+            value=f"- **{order['user_name']}** (<@{order['user_id']}>)",
+            inline=False
+        )
+        embed.add_field(name="Món", value=f"- {order['menu']}", inline=False)
+        embed.add_field(name="Giá", value=f"- **{order['price']:,}đ**", inline=False)
+        embed.set_footer(text=now.strftime("%d/%m/%Y %H:%M"))
+
+        await interaction.response.send_message(embed=embed)

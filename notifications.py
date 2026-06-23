@@ -29,13 +29,13 @@ class NotificationsCog(commands.Cog):
                     channel = None
             if channel:
                 embed = discord.Embed(
-                    title="🍽️ Đặt Cơm Hôm Nay",
-                    description="Đến giờ đặt cơm rồi! Hãy sử dụng lệnh `/menu` để đặt cơm",
+                    title="🍔 Đặt Cơm Hôm Nay",
+                    description="- Đến giờ đặt cơm rồi! Hãy sử dụng lệnh `/menu` để đặt cơm",
                     color=discord.Color.green()
                 )
                 embed.add_field(
                     name="⏰ Thời gian",
-                    value="10:00 AM",
+                    value="- 10:00 AM",
                     inline=False
                 )
                 embed.set_footer(text="Thông báo tự động hàng ngày")
@@ -62,8 +62,8 @@ class NotificationsCog(commands.Cog):
                 
                 debts = get_all_debts()
                 embed = discord.Embed(
-                    title="📊 Báo Cáo Công Nợ Tuần",
-                    description="Dùng `/mydebt` để xem chi tiết",
+                    title="📈 Báo Cáo Công Nợ Tuần",
+                    description="- Dùng `/mydebt` để xem chi tiết",
                     color=discord.Color.green()
                 )
                 
@@ -88,18 +88,18 @@ class NotificationsCog(commands.Cog):
                     debt_text = "\n".join(debt_lines)
 
                     embed.add_field(
-                        name="💰 Công nợ",
+                        name="Công nợ",
                         value=debt_text,
                         inline=False
                     )
 
                     embed.add_field(
-                        name="📌 Tổng cộng",
-                        value=f"**{total:,}đ**",
+                        name="Tổng cộng",
+                        value=f"- **{total:,}đ**",
                         inline=False
                     )
                 else:
-                    embed.description = "✅ Không có công nợ"
+                    embed.description = "🎉 Không có công nợ"
                 
                 embed.set_footer(text="Báo cáo tự động hàng tuần - Thứ 6 lúc 14:00")
                 await channel.send(embed=embed)

@@ -1,3 +1,7 @@
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+sys.stderr.reconfigure(encoding='utf-8')
+
 import discord
 from discord.ext import commands
 from discord import app_commands
@@ -164,13 +168,13 @@ async def pay(
    
     embed = discord.Embed(
         title="💰 Thanh Toán Công Nợ",
-        description="Chọn những ngày bạn muốn thanh toán từ danh sách bên dưới.",
+        description="- Chọn những ngày bạn muốn thanh toán từ danh sách bên dưới.",
         color=discord.Color.blue()
     )
     
     embed.add_field(
-        name="💵 Tổng nợ hiện tại",
-        value=f"**{total_all:,}đ** ({len(debts)} ngày)",
+        name="Tổng nợ hiện tại",
+        value=f"- **{total_all:,}đ** ({len(debts)} ngày)",
         inline=False
     )
 

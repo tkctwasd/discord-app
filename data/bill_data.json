@@ -1,40 +1,36 @@
 {
-  "next_id": 33,
+  "next_id": 7,
   "transactions": [
     {
       "id": 1,
-      "timestamp": "23/06/2026 22:15:24",
+      "timestamp": "24/06/2026 00:19:13",
       "user_id": 1087053059147972648,
       "user_name": "mindongun123",
-      "amount": 60000,
-      "content": "Chuyen khoan tien com 1293",
+      "amount": 30000,
+      "content": "",
       "order_ids": [
-        14,
-        15
+        14
       ],
       "order_dates": [
-        "23/06/2026",
-        "21/06/2026"
+        "23/06/2026"
       ],
       "confirmed_by_id": 1087053059147972648,
       "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "chuyen chua thanh cong"
+      "status": "confirmed",
+      "reason": null
     },
     {
       "id": 2,
-      "timestamp": "23/06/2026 22:15:47",
+      "timestamp": "24/06/2026 01:01:38",
       "user_id": 1087053059147972648,
       "user_name": "mindongun123",
-      "amount": 60000,
-      "content": "chuyen tien com",
+      "amount": 30000,
+      "content": "",
       "order_ids": [
-        14,
-        15
+        18
       ],
       "order_dates": [
-        "23/06/2026",
-        "21/06/2026"
+        "15/06/2026"
       ],
       "confirmed_by_id": 1087053059147972648,
       "confirmed_by_name": "mindongun123",
@@ -43,16 +39,34 @@
     },
     {
       "id": 3,
-      "timestamp": "23/06/2026 22:21:46",
+      "timestamp": "24/06/2026 01:02:09",
       "user_id": 1087053059147972648,
       "user_name": "mindongun123",
       "amount": 30000,
-      "content": "thanh toan tien com",
+      "content": "",
       "order_ids": [
-        16
+        26
       ],
       "order_dates": [
-        "17/06/2026"
+        "24/06/2026"
+      ],
+      "confirmed_by_id": 1087053059147972648,
+      "confirmed_by_name": "mindongun123",
+      "status": "rejected",
+      "reason": "3"
+    },
+    {
+      "id": 4,
+      "timestamp": "24/06/2026 01:08:07",
+      "user_id": 1087053059147972648,
+      "user_name": "mindongun123",
+      "amount": 30000,
+      "content": "",
+      "order_ids": [
+        26
+      ],
+      "order_dates": [
+        "24/06/2026"
       ],
       "confirmed_by_id": 1087053059147972648,
       "confirmed_by_name": "mindongun123",
@@ -60,37 +74,17 @@
       "reason": null
     },
     {
-      "id": 4,
-      "timestamp": "23/06/2026 22:25:18",
+      "id": 5,
+      "timestamp": "24/06/2026 01:09:19",
       "user_id": 1087053059147972648,
       "user_name": "mindongun123",
       "amount": 30000,
-      "content": "Thanh toan tien com",
+      "content": "",
       "order_ids": [
         17
       ],
       "order_dates": [
         "18/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "tu choi"
-    },
-    {
-      "id": 5,
-      "timestamp": "23/06/2026 22:26:06",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 60000,
-      "content": "thanh toan tien com",
-      "order_ids": [
-        17,
-        18
-      ],
-      "order_dates": [
-        "18/06/2026",
-        "15/06/2026"
       ],
       "confirmed_by_id": 1087053059147972648,
       "confirmed_by_name": "mindongun123",
@@ -99,333 +93,7 @@
     },
     {
       "id": 6,
-      "timestamp": "23/06/2026 22:45:58",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        15
-      ],
-      "order_dates": [
-        "21/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 7,
-      "timestamp": "23/06/2026 22:49:48",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "Hello",
-      "order_ids": [
-        18
-      ],
-      "order_dates": [
-        "15/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "h"
-    },
-    {
-      "id": 8,
-      "timestamp": "23/06/2026 22:49:56",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        14
-      ],
-      "order_dates": [
-        "23/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "h"
-    },
-    {
-      "id": 9,
-      "timestamp": "23/06/2026 22:56:31",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "d",
-      "order_ids": [
-        18
-      ],
-      "order_dates": [
-        "15/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 10,
-      "timestamp": "23/06/2026 22:58:44",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "thanh toan tien com",
-      "order_ids": [
-        17
-      ],
-      "order_dates": [
-        "18/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 11,
-      "timestamp": "23/06/2026 23:02:51",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        14
-      ],
-      "order_dates": [
-        "23/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 12,
-      "timestamp": "23/06/2026 23:06:14",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        16
-      ],
-      "order_dates": [
-        "17/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 13,
-      "timestamp": "23/06/2026 23:06:17",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "s",
-      "order_ids": [
-        17
-      ],
-      "order_dates": [
-        "18/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 14,
-      "timestamp": "23/06/2026 23:07:13",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        15
-      ],
-      "order_dates": [
-        "21/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 15,
-      "timestamp": "23/06/2026 23:07:17",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 60000,
-      "content": "",
-      "order_ids": [
-        15,
-        14
-      ],
-      "order_dates": [
-        "21/06/2026",
-        "23/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 16,
-      "timestamp": "23/06/2026 23:15:20",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        14
-      ],
-      "order_dates": [
-        "23/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "k"
-    },
-    {
-      "id": 17,
-      "timestamp": "23/06/2026 23:15:22",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        16
-      ],
-      "order_dates": [
-        "17/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 18,
-      "timestamp": "23/06/2026 23:26:59",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "thanh toan chuyen khoan",
-      "order_ids": [
-        14
-      ],
-      "order_dates": [
-        "23/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 19,
-      "timestamp": "23/06/2026 23:29:58",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        15
-      ],
-      "order_dates": [
-        "21/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "2"
-    },
-    {
-      "id": 20,
-      "timestamp": "23/06/2026 23:30:04",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "s",
-      "order_ids": [
-        17
-      ],
-      "order_dates": [
-        "18/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "3"
-    },
-    {
-      "id": 21,
-      "timestamp": "23/06/2026 23:32:29",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        15
-      ],
-      "order_dates": [
-        "21/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 22,
-      "timestamp": "23/06/2026 23:32:32",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        17
-      ],
-      "order_dates": [
-        "18/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 23,
-      "timestamp": "23/06/2026 23:33:47",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "2",
-      "order_ids": [
-        18
-      ],
-      "order_dates": [
-        "15/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "anh bi trung voi anh 2"
-    },
-    {
-      "id": 24,
-      "timestamp": "23/06/2026 23:39:42",
+      "timestamp": "24/06/2026 01:13:38",
       "user_id": 1087053059147972648,
       "user_name": "mindongun123",
       "amount": 30000,
@@ -435,150 +103,6 @@
       ],
       "order_dates": [
         "15/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 25,
-      "timestamp": "23/06/2026 23:40:24",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        17
-      ],
-      "order_dates": [
-        "18/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "3"
-    },
-    {
-      "id": 26,
-      "timestamp": "23/06/2026 23:41:51",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        18
-      ],
-      "order_dates": [
-        "15/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "32"
-    },
-    {
-      "id": 27,
-      "timestamp": "23/06/2026 23:43:03",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        18
-      ],
-      "order_dates": [
-        "15/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "sd1a"
-    },
-    {
-      "id": 28,
-      "timestamp": "23/06/2026 23:44:49",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "s",
-      "order_ids": [
-        17
-      ],
-      "order_dates": [
-        "18/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "da"
-    },
-    {
-      "id": 29,
-      "timestamp": "23/06/2026 23:45:31",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "s",
-      "order_ids": [
-        18
-      ],
-      "order_dates": [
-        "15/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 30,
-      "timestamp": "23/06/2026 23:51:00",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "thanh toan",
-      "order_ids": [
-        16
-      ],
-      "order_dates": [
-        "17/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "confirmed",
-      "reason": null
-    },
-    {
-      "id": 31,
-      "timestamp": "23/06/2026 23:55:00",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "d",
-      "order_ids": [
-        14
-      ],
-      "order_dates": [
-        "23/06/2026"
-      ],
-      "confirmed_by_id": 1087053059147972648,
-      "confirmed_by_name": "mindongun123",
-      "status": "rejected",
-      "reason": "s"
-    },
-    {
-      "id": 32,
-      "timestamp": "23/06/2026 23:56:58",
-      "user_id": 1087053059147972648,
-      "user_name": "mindongun123",
-      "amount": 30000,
-      "content": "",
-      "order_ids": [
-        14
-      ],
-      "order_dates": [
-        "23/06/2026"
       ],
       "confirmed_by_id": 1087053059147972648,
       "confirmed_by_name": "mindongun123",

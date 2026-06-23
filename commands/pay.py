@@ -105,12 +105,12 @@ class PayConfirmModal(Modal, title="Xác nhận thanh toán"):
             admin = await interaction.client.fetch_user(ADMIN_ID)
         except Exception:
             await interaction.response.send_message(
-                "❌ Không thể gửi hóa đơn. Vui lòng thử lại sau.", ephemeral=True
+                "🚫 Không thể gửi hóa đơn. Vui lòng thử lại sau.", ephemeral=True
             )
             return
 
         dates_lines = "\n".join(
-            f"• {o['date']} - {o['price']:,}đ"
+            f"- {o['date']} - {o['price']:,}đ"
             for o in self.selected_orders
         )
         admin_embed = discord.Embed(
@@ -119,13 +119,13 @@ class PayConfirmModal(Modal, title="Xác nhận thanh toán"):
             timestamp=now
         )
         admin_embed.add_field(
-            name="👤 Người thanh toán",
-            value=f"**{interaction.user.display_name}** (<@{interaction.user.id}>)",
+            name="Người thanh toán",
+            value=f"- **{interaction.user.display_name}** (<@{interaction.user.id}>)",
             inline=False
         )
-        admin_embed.add_field(name="📅 Thanh toán các ngày", value=dates_lines, inline=False)
-        admin_embed.add_field(name="💵 Tổng tiền", value=f"**{self.total:,}đ**", inline=True)
-        admin_embed.add_field(name="📝 Nội dung", value=self.content.value or "(không có)", inline=False)
+        admin_embed.add_field(name="Thanh toán các ngày", value=dates_lines, inline=False)
+        admin_embed.add_field(name="Tổng tiền", value=f"- **{self.total:,}đ**", inline=True)
+        admin_embed.add_field(name="Nội dung", value=f"- {self.content.value or '(không có)'}", inline=False)
         admin_embed.set_footer(text=f"Gửi lúc {now.strftime('%H:%M %d/%m/%Y')}")
         if self.image_url:
             admin_embed.set_image(url=self.image_url)
@@ -141,16 +141,16 @@ class PayConfirmModal(Modal, title="Xác nhận thanh toán"):
         mark_pending_by_ids(self.order_ids)
         admin_message = await admin.send(embed=admin_embed, view=admin_view)
 
-        dates_preview = "\n".join(f"• {o['date']} — {o['price']:,}đ" for o in self.selected_orders)
+        dates_preview = "\n".join(f"- {o['date']} : {o['price']:,}đ" for o in self.selected_orders)
         confirm_embed = discord.Embed(
-            title="✅ Hóa đơn đã gửi!",
+            title="🧾 Hóa đơn đã gửi!",
             color=discord.Color.green(),
             timestamp=now
         )
-        confirm_embed.add_field(name="📅 Thanh toán các ngày", value=dates_preview, inline=False)
-        confirm_embed.add_field(name="💵 Số tiền", value=f"**{self.total:,}đ**", inline=True)
-        confirm_embed.add_field(name="📝 Nội dung", value=self.content.value or "(không có)", inline=False)
-        confirm_embed.set_footer(text="⏳ Chờ xác nhận từ admin")
+        confirm_embed.add_field(name="Thanh toán các ngày", value=dates_preview, inline=False)
+        confirm_embed.add_field(name="Số tiền", value=f"- **{self.total:,}đ**", inline=True)
+        confirm_embed.add_field(name="Nội dung", value=f"- {self.content.value or '(không có)'}", inline=False)
+        confirm_embed.set_footer(text="Chờ xác nhận từ admin")
         if self.image_url:
             confirm_embed.set_image(url=self.image_url)
 
@@ -182,7 +182,7 @@ class PayCancelView(View):
         unmark_pending_by_ids(self.order_ids)
         try:
             await self.admin_message.edit(
-                content="❌ **Người dùng đã hủy yêu cầu thanh toán này.**",
+                content="🚫 **Người dùng đã hủy yêu cầu thanh toán này.**",
                 view=_make_disabled_view()
             )
         except Exception:
@@ -238,30 +238,30 @@ class RejectModal(Modal, title="Lý do từ chối"):
         if channel:
             now = datetime.now(TIMEZONE)
             dates_lines = "\n".join(
-                f"• {o['date']} — {o['price']:,}đ"
+                f"- {o['date']} : {o['price']:,}đ"
                 for o in self.selected_orders
             )
             embed = discord.Embed(
-                title="❌ Yêu cầu thanh toán bị từ chối",
+                title="🚫 Yêu cầu thanh toán bị từ chối",
                 color=discord.Color.red(),
                 timestamp=now
             )
             embed.add_field(
-                name="👤 Người thanh toán",
-                value=f"**{self.target_user.display_name}** (<@{self.target_user.id}>)",
+                name="Người thanh toán",
+                value=f"- **{self.target_user.display_name}** (<@{self.target_user.id}>)",
                 inline=False
             )
-            embed.add_field(name="📅 Các ngày thanh toán", value=dates_lines, inline=False)
-            embed.add_field(name="💵 Số tiền", value=f"**{self.amount:,}đ**", inline=True)
+            embed.add_field(name="Các ngày thanh toán", value=dates_lines, inline=False)
+            embed.add_field(name="Số tiền", value=f"- **{self.amount:,}đ**", inline=True)
             if self.content:
-                embed.add_field(name="📝 Nội dung", value=self.content, inline=False)
-            embed.add_field(name="📌 Lý do từ chối", value=self.reason.value, inline=False)
+                embed.add_field(name="Nội dung", value=f"- {self.content}", inline=False)
+            embed.add_field(name="Lý do từ chối", value=f"- {self.reason.value}", inline=False)
             embed.add_field(
                 name="Từ chối bởi",
-                value=f"**{interaction.user.display_name}** (<@{interaction.user.id}>)",
+                value=f"- **{interaction.user.display_name}** (<@{interaction.user.id}>)",
                 inline=True
             )
-            await channel.send(f"❌**{self.target_user.display_name}** (<@{self.target_user.id}>) đã bị từ chối yêu cầu thanh toán", embed=embed)
+            await channel.send(f"🚫**{self.target_user.display_name}** (<@{self.target_user.id}>) đã bị từ chối yêu cầu thanh toán", embed=embed)
 
 
 class AdminPayView(View):
@@ -275,7 +275,7 @@ class AdminPayView(View):
         self.content = content
         self.channel_id = channel_id
 
-    @discord.ui.button(label="✅ Xác nhận", style=discord.ButtonStyle.success)
+    @discord.ui.button(label="Xác nhận", style=discord.ButtonStyle.success)
     async def confirm(self, interaction: discord.Interaction, _: Button):
 
         unmark_pending_by_ids(self.order_ids)
@@ -299,7 +299,7 @@ class AdminPayView(View):
         if channel:
             now = datetime.now(TIMEZONE)
             dates_lines = "\n".join(
-                f"• {o['date']} - {o['menu']}"
+                f"- {o['date']} - {o['menu']}"
                 for o in self.selected_orders
             )
             embed = discord.Embed(
@@ -308,7 +308,7 @@ class AdminPayView(View):
             )
             embed.add_field(
                 name="Người thanh toán",
-                value=f"**{self.target_user.display_name}** (<@{self.target_user.id}>)",
+                value=f"- **{self.target_user.display_name}** (<@{self.target_user.id}>)",
                 inline=False
             )
             embed.add_field(
@@ -318,26 +318,26 @@ class AdminPayView(View):
             )
             embed.add_field(
                 name="Số tiền",
-                value=f"**{self.amount:,}đ**",
+                value=f"- **{self.amount:,}đ**",
                 inline=False
             )
             embed.add_field(
                 name="Xác nhận bởi",
-                value=f"**{interaction.user.display_name}** (<@{interaction.user.id}>)",
+                value=f"- **{interaction.user.display_name}** (<@{interaction.user.id}>)",
                 inline=False
             )
             embed.add_field(
                 name="Thời gian",
-                value=now.strftime("%d/%m/%Y %H:%M:%S"),
+                value=now.strftime("- %d/%m/%Y %H:%M:%S"),
                 inline=False
             )
             await channel.send(
                 f"🎉 **{self.target_user.display_name}** (<@{self.target_user.id}>) "
-                f"đã thanh toán thành công **{self.amount:,}đ** ✅",
+                f"đã thanh toán thành công **{self.amount:,}đ**",
                 embed=embed
             )
 
-    @discord.ui.button(label="❌ Từ chối", style=discord.ButtonStyle.danger)
+    @discord.ui.button(label="Từ chối", style=discord.ButtonStyle.danger)
     async def reject(self, interaction: discord.Interaction, _: Button):
         await interaction.response.send_modal(
             RejectModal(
@@ -354,6 +354,6 @@ class AdminPayView(View):
 
 def _make_disabled_view():
     view = View()
-    view.add_item(Button(label="✅ Xác nhận", style=discord.ButtonStyle.success, disabled=True))
-    view.add_item(Button(label="❌ Từ chối", style=discord.ButtonStyle.danger, disabled=True))
+    view.add_item(Button(label="Xác nhận", style=discord.ButtonStyle.success, disabled=True))
+    view.add_item(Button(label="Từ chối", style=discord.ButtonStyle.danger, disabled=True))
     return view

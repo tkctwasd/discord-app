@@ -38,6 +38,10 @@ def create_order(user, menu, price, message=None):
 
             return order, True
 
+    max_existing = max((o["id"] for o in data["orders"]), default=0)
+    if data["next_id"] <= max_existing:
+        data["next_id"] = max_existing + 1
+
     order = {
         "id": data["next_id"],
         "date": today,
